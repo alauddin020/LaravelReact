@@ -75315,7 +75315,8 @@ function (_Component) {
       email: '',
       name: '',
       alal: '',
-      error: null
+      error: null,
+      show: true
     }; // this.state = {name: '', email: ''};
 
     _this.handleChange1 = _this.handleChange1.bind(_assertThisInitialized(_this));
@@ -75364,11 +75365,13 @@ function (_Component) {
           _this3.setState({
             name: response.data.name,
             email: response.data.email,
-            alal: response.data.name
+            alal: response.data.name,
+            show: false
           });
         } else {
           _this3.setState({
-            error: response.data
+            error: response.data,
+            show: false
           });
         }
 
@@ -75380,6 +75383,10 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      if (this.state.show) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Loading"));
+      }
+
       if (this.state.error === 'error') {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "User Not Found"));
       }
@@ -75711,7 +75718,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ViewUser).call(this, props));
     _this.state = {
       user: {},
-      error: null
+      error: null,
+      show: true
     };
     return _this;
   }
@@ -75724,11 +75732,13 @@ function (_Component) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/user/' + this.props.match.params.id).then(function (response) {
         if (response.data.data === 'ok') {
           _this2.setState({
-            user: response.data.user
+            user: response.data.user,
+            show: false
           });
         } else {
           _this2.setState({
-            error: response.data.data
+            error: response.data.data,
+            show: false
           });
         }
       })["catch"](function (error) {
@@ -75738,6 +75748,10 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      if (this.state.show) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Loading"));
+      }
+
       if (this.state.error === 'error') {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card"

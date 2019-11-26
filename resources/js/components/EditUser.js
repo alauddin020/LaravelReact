@@ -9,7 +9,8 @@ export default class EditUser extends Component {
             email: '',
             name: '',
             alal: '',
-            error: null
+            error: null,
+            show: true
         }
         // this.state = {name: '', email: ''};
         this.handleChange1 = this.handleChange1.bind(this);
@@ -46,12 +47,13 @@ export default class EditUser extends Component {
            if (response.data !=='error')
            {
                this.setState({
-                   name: response.data.name,email:response.data.email,alal:response.data.name
+                   name: response.data.name,email:response.data.email,alal:response.data.name,
+                   show:false
                });
            }
            else
            {
-               this.setState({error: response.data});
+               this.setState({error: response.data,show:false});
            }
             console.log(response.data);
         }).catch(error => {
@@ -60,6 +62,12 @@ export default class EditUser extends Component {
     }
 
     render() {
+        if (this.state.show)
+        {
+            return (
+                <div><h4>Loading</h4></div>
+            );
+        }
         if (this.state.error === 'error')
         {
             return (

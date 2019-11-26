@@ -6,7 +6,8 @@ export default class ViewUser extends Component {
         super(props);
         this.state = {
             user: {},
-            error: null
+            error: null,
+            show: true
         }
     }
     UNSAFE_componentWillMount()
@@ -15,13 +16,15 @@ export default class ViewUser extends Component {
             if (response.data.data==='ok')
             {
                 this.setState({
-                    user:  response.data.user
+                    user:  response.data.user,
+                    show: false
                 });
             }
             else
             {
                 this.setState({
-                    error:  response.data.data
+                    error:  response.data.data,
+                    show: false
                 });
             }
         }).catch(error=> {
@@ -30,6 +33,12 @@ export default class ViewUser extends Component {
     }
 
     render() {
+        if (this.state.show)
+        {
+            return (
+                <div><h4>Loading</h4></div>
+            );
+        }
         if (this.state.error === 'error')
         {
             return (
