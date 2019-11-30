@@ -5,6 +5,7 @@ import User from './components/User';
 import ViewUser from './components/ViewUser';
 import EditUser from './components/EditUser';
 import AddUser from './components/AddUser';
+import LogIn from "./components/LogIn";
 import E404 from "./components/E404";
 export default class Index extends Component {
     render() {
@@ -20,6 +21,9 @@ export default class Index extends Component {
                                 <li>
                                     <Link className="nav-item nav-link" to="/user">Users</Link>
                                 </li>
+                                <li>
+                                    <Link className="nav-item nav-link" to="/login">Login</Link>
+                                </li>
                             </ul>
                         </nav>
                         <Switch>
@@ -27,6 +31,7 @@ export default class Index extends Component {
                             <Route  path="/user" exact component={AddUser} />
                             <Route  path="/user/:id" exact component={ViewUser}  />} />
                             <Route  path="/user/:id/edit" exact component={EditUser} />} />
+                            <Route  path="/login" exact component={LogIn} />} />
                             <Route  path="/*" exact component={E404} />} />
                         </Switch>
                     </div>
