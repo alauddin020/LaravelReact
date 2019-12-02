@@ -18,3 +18,4 @@ use Illuminate\Http\Request;
 //});
 Route::resource('blog','Api\BlogController');
 Route::resource('user','UserController');
+Route::post('login','UserController@login');

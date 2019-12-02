@@ -7,6 +7,7 @@ import EditUser from './components/EditUser';
 import AddUser from './components/AddUser';
 import LogIn from "./components/LogIn";
 import E404 from "./components/E404";
+import Logout from "./components/Logout";
 export default class Index extends Component {
     render() {
         return (
@@ -22,7 +23,7 @@ export default class Index extends Component {
                                     <Link className="nav-item nav-link" to="/user">Users</Link>
                                 </li>
                                 <li>
-                                    <Link className="nav-item nav-link" to="/login">Login</Link>
+                                    <Link className="nav-item nav-link" to={localStorage.getItem('user')!==null ? '/logout' : '/login'} >{ localStorage.getItem('user') !==null ? localStorage.getItem('user') : 'Login'}</Link>
                                 </li>
                             </ul>
                         </nav>
@@ -32,6 +33,7 @@ export default class Index extends Component {
                             <Route  path="/user/:id" exact component={ViewUser}  />} />
                             <Route  path="/user/:id/edit" exact component={EditUser} />} />
                             <Route  path="/login" exact component={LogIn} />} />
+                            <Route  path="/logout" exact component={Logout} />} />
                             <Route  path="/*" exact component={E404} />} />
                         </Switch>
                     </div>

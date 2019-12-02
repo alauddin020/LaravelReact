@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -119,6 +120,38 @@ class UserController extends Controller
         else
         {
             return response()->json(['status'=>$id]);
+        }
+    }
+
+    public function login(Request $request)
+    {
+//        $loginData = $request->validate([
+//            'email' => 'email|required',
+//            'password' => 'required'
+//        ]);
+        $user = User::where('email',$request->email)->first();
+        if ($user)
+        {
+            if(!auth()->attempt(['email'=>$request->email,'password'=>$request->password]))
+            {
+                return response()->json([
+                    'error' => 'ok',
+                    'message' => 'Invalid Password',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'success' => 'ok',
+                    'message' => $user,
+                ]);
+            }
+        }
+        else{
+            return response()->json([
+                'error' => 'ok',
+                'message' => 'Email Not Found',
+            ]);
         }
     }
 }
