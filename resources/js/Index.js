@@ -9,6 +9,7 @@ import LogIn from "./components/LogIn";
 import E404 from "./components/E404";
 import Logout from "./components/Logout";
 import axios from "axios";
+// import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 export default class Index extends Component {
     constructor(props){
         super(props);
@@ -28,22 +29,38 @@ export default class Index extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="">
                 <Router>
-                    <div>
-                        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                            <ul className="navbar-nav">
-                                <li>
-                                    <Link className="nav-item nav-link active" to="/">Home</Link>
-                                </li>
-                                <li>
-                                    <Link className="nav-item nav-link" to="/user">Users</Link>
-                                </li>
-                                <li>
-                                    <Link className="nav-item nav-link" to={localStorage.getItem('user')!==null ? '/logout' : '/login'} >{ localStorage.getItem('user') !==null ? localStorage.getItem('user') : 'Login'}</Link>
-                                </li>
-                            </ul>
+                        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+                            <Link className="navbar-brand" to="/">Home</Link>
+                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+                            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul className="navbar-nav">
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/user">Add User</Link>
+                                    </li>
+                                    {localStorage.getItem('user')===null ?
+                                        (<li className="nav-item">
+                                            <Link className="nav-link" to="/login">Login</Link>
+                                        </li>)
+                                        : (
+                                            <li className="nav-item dropdown">
+                                                <a className="nav-link dropdown-toggle" href={''} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    {localStorage.getItem('user')}
+                                                </a>
+                                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                    <Link className="dropdown-item" to="/dashboard">{localStorage.getItem('user')}</Link>
+                                                    <Link className="dropdown-item" to="/logout">Logout</Link>
+                                                </div>
+                                            </li>
+                                        )}
+
+                                </ul>
+                            </div>
                         </nav>
+                    <div className={'container'} style={{marginTop: '5%'}}>
                         <Switch>
                             <Route  path="/" exact component={User} />
                             <Route  path="/user" exact component={AddUser} />

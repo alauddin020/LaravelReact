@@ -87,7 +87,7 @@ export default class User extends Component {
         }
         return (
             <div className="card">
-                <div className="card-header">All User List</div>
+                <div className="card-header"><strong>All User List</strong></div>
                 <div className="card-body">
                     <table className="table table-bordered">
                         <thead>
@@ -126,7 +126,7 @@ export default class User extends Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                              <h4>Are you sure to delete this user </h4>
+                                <h4>Are you sure to delete this user </h4>
                             </div>
                             <div className="modal-footer">
                                 <button type="button"  className="btn btn-secondary" data-dismiss="modal">Close</button>
