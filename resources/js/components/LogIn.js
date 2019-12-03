@@ -78,7 +78,9 @@ export default class LogIn extends React.Component{
                 this.setState({
                     loginError: ''
                 })
-                localStorage.setItem('user',response.data.message.name)
+                // console.log(response.data.message);
+                localStorage.setItem('tokenId',response.data.message)
+                localStorage.setItem('user',response.data.name)
                 window.location.reload();
             }
         }).catch(error=> {

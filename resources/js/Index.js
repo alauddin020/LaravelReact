@@ -8,7 +8,24 @@ import AddUser from './components/AddUser';
 import LogIn from "./components/LogIn";
 import E404 from "./components/E404";
 import Logout from "./components/Logout";
+import axios from "axios";
 export default class Index extends Component {
+    constructor(props){
+        super(props);
+        this.fetchUser();
+    }
+    fetchUser(){
+        if (localStorage.getItem('tokenId') !==null)
+        {
+            const api = '/api/user-login/';
+            const token = localStorage.getItem('tokenId');
+            axios.get(api, {headers: {"Authorization": `Bearer ${token}`}}).then(response => {
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+    }
     render() {
         return (
             <div className="container">

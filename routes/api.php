@@ -13,9 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('user-login','UserController@loginUser');
+    Route::post('logout','UserController@logout');
+});
 Route::resource('blog','Api\BlogController');
 Route::resource('user','UserController');
 Route::post('login','UserController@login');

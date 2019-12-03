@@ -1,15 +1,23 @@
 import React from "react";
+import axios from "axios";
 export default class Logout extends React.Component{
     constructor(props)
     {
         super(props);
         // this.refresh();
         this.logout();
-        this.isLogin();
+        // this.isLogin();
     }
     logout(){
-        localStorage.removeItem('user');
-        window.location.assign('/login');
+        const api = '/api/logout/';
+        const token = localStorage.getItem('tokenId');
+        axios.post(api, {headers: {"Authorization": `Bearer ${token}`}}).then(response => {
+            localStorage.removeItem('user');
+            localStorage.removeItem('tokenId');
+            window.location.assign('/login');
+        }).catch(error => {
+            console.log(error);
+        })
     }
     isLogin()
     {

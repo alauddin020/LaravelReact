@@ -141,9 +141,11 @@ class UserController extends Controller
             }
             else
             {
+                $accessToken = $user->createToken('authToken')->accessToken;
                 return response()->json([
                     'success' => 'ok',
-                    'message' => $user,
+                    'message' => $accessToken,
+                    'name' => $user->name,
                 ]);
             }
         }
@@ -153,5 +155,17 @@ class UserController extends Controller
                 'message' => 'Email Not Found',
             ]);
         }
+    }
+
+    public function loginUser()
+    {
+        return Auth::user();
+    }
+
+    public function logout()
+    {
+        $a =Auth::user()->token()->revoke();
+        Auth::user()->token()->delete();
+        return response()->json(['message'=>$a]);
     }
 }
